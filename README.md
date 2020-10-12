@@ -1,1 +1,1 @@
-# GPU_DZ1230_wyszukiwanie_samog-osek_w_tek-cie
+# GPU_DZ1230
