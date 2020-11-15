@@ -1,3 +1,4 @@
+import hurry.filesize
 import string
 import random
 
@@ -15,3 +16,10 @@ def save_text_to_file(text: str, path: str):
     file = open(path, "w")
     file.write(text)
     file.close
+    
+def utf8len(s):
+    return len(s.encode('utf-8'))
+
+def get_file_size(text):
+    """Returns file size in MB"""
+    return hurry.filesize.size(utf8len(text))
