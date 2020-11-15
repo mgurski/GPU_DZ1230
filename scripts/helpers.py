@@ -3,7 +3,7 @@ import string
 import random
 
 def generate_text(length: int):
-    letters = string.ascii_letters + string.whitespace.replace('\x0b\x0c','')
+    letters = string.ascii_letters + string.whitespace.replace('\x0b\x0c','') + 'ąĄęĘóÓżŻźŹćĆńŃśŚłŁ'
     result_str = ''.join(random.choice(letters) for i in range(length))
     return result_str
 
@@ -16,10 +16,6 @@ def save_text_to_file(text: str, path: str):
     file.write(text)
     file.close
     
-def save_text_to_file(text, path):
-    """Saves given text""" 
-    pass
-
 def utf8len(s):
     return len(s.encode('utf-8'))
 
