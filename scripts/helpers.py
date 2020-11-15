@@ -15,10 +15,6 @@ def save_text_to_file(text: str, path: str):
     file = open(path, "w")
     file.write(text)
     file.close
-    
-def save_text_to_file(text, path):
-    """Saves given text""" 
-    pass
 
 def utf8len(s):
     return len(s.encode('utf-8'))
