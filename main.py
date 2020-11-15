@@ -37,9 +37,9 @@ if __name__ == "__main__":
         text = scripts.helpers.generate_text(args.autogenerate)
 
     if(args.cpu):
-        scripts.cpu.counting_vowels_in_text(text)
+        print(scripts.cpu.counting_vowels_in_text(text))
     elif(args.gpu):
-        scripts.gpu.counting_vowels_in_text(text)
+        print(scripts.gpu.counting_vowels_in_text(text))
     elif(args.cpu_test):
         scripts.cpu_tests.cpu_test()
     elif(args.gpu_test):
