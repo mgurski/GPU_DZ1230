@@ -6,6 +6,13 @@ verify_ssl = true
 [dev-packages]
 
 [packages]
+pylab-sdk = "*"
+requests = "*"
+lorem = "*"
+hurry = "*"
+"hurry.filesize" = "*"
+pycuda = "*"
+nltk = "*"
 
 [requires]
 python_version = "3.6"
