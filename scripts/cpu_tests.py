@@ -7,8 +7,7 @@ from . import helpers
 def cpu_test():
     """Returns csv"""
     
-    #size in MB
-    test_sizes = [50, 100, 500, 1000, 2000]
+    test_sizes = [5, 10, 15]
 
     final_performance_test_list = []
     current_performance_test_list = []
@@ -17,8 +16,8 @@ def cpu_test():
     current_result_list = []
 
     for i in range(len(test_sizes)):
-        #text = helpers.generate_text(test_sizes[i])
-        text = "abcd"
+        print('generowanie tekstu nr ' + str(i))
+        text = helpers.faker_text(test_sizes[i])
 
         current_performance_test_list.clear()
         current_result_list.clear()
@@ -26,7 +25,8 @@ def cpu_test():
         current_performance_test_list.append(str(test_sizes[i]) + " MB")
         current_result_list.append(str(test_sizes[i]) + " MB")
 
-        for i in range(10):
+        for i in range(2):
+            print('test nr ' + str(i))
             start = time.perf_counter()
             result = cpu.counting_vowels_in_text(text)
             end = time.perf_counter()-start
