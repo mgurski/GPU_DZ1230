@@ -39,18 +39,19 @@ if __name__ == "__main__":
     elif(args.path != ''):
         text = scripts.helpers.load_text_from_file(args.path)
     else:
-        text = scripts.helpers.generate_text_in_mb(args.autogenerate)
+        text = scripts.helpers.faker_text(args.autogenerate)
 
     if(args.cpu):
         start = time.perf_counter()
-        scripts.cpu.counting_vowels_in_text(text)
-        print(time.perf_counter()-start)
+        result = scripts.cpu.counting_vowels_in_text(text)
+        end = time.perf_counter()-start
+        print('Wynik: ' + str(result) + ' osiągnieto w czasie: ' + str(end) + ' sek.')
         
     elif(args.gpu):
         start = time.perf_counter()
-        scripts.gpu.counting_vowels_in_text(text)
-        print(time.perf_counter()-start)
-
+        result = scripts.gpu.counting_vowels_in_text(text)
+        end = time.perf_counter()-start
+        print('Wynik: ' + str(result) + ' osiągnieto w czasie: ' + str(end) + ' sek.')
 
 
 
