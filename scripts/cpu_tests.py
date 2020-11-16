@@ -17,7 +17,7 @@ def cpu_test():
 
     for i in range(len(test_sizes)):
         print('generowanie tekstu nr ' + str(i))
-        text = helpers.faker_text(test_sizes[i])
+        text = helpers.generate_text_in_mb(test_sizes[i])
 
         current_performance_test_list.clear()
         current_result_list.clear()

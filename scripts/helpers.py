@@ -1,15 +1,14 @@
 import hurry.filesize
 import string
 import random
+import math
 from faker import Faker
-
 
 
 def generate_text(length: int):
     letters = string.ascii_letters + string.whitespace.replace('\x0b\x0c','')
     result_str = ''.join(random.choice(letters) for i in range(length))
     return result_str
-
 
 def faker_text(size_mb: int):
     fake = Faker()
@@ -18,7 +17,18 @@ def faker_text(size_mb: int):
  
     return text
 
+def faker_text_length(length: int):
+    fake = Faker()
 
+    text = fake.text(max_nb_chars=1024)
+
+    return text
+
+def generate_text_in_mb(size: int):
+    text = faker_text_length(1000)
+    size = size * 1000000
+    text = text*math.ceil((size/int(1000)))
+    return text
 
 def load_text_from_file(path: str):
     """Loads a textfile from the given path and returns it"""
