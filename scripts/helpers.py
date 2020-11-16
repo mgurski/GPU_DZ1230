@@ -1,23 +1,29 @@
 import hurry.filesize
 import string
 import random
-import lorem
-import math
+from faker import Faker
+
+
 
 def generate_text(length: int):
-    letters = string.ascii_letters + string.whitespace.replace('\x0b\x0c','') + 'ąĄęĘóÓżŻźŹćĆńŃśŚłŁ'
+    letters = string.ascii_letters + string.whitespace.replace('\x0b\x0c','')
     result_str = ''.join(random.choice(letters) for i in range(length))
     return result_str
 
-def generate_text_in_mb(size: int):
-    text = generate_text(1000)
-    size = size * 1000000
-    text = text*math.ceil((size/int(1000)))
+
+def faker_text(size_mb: int):
+    fake = Faker()
+
+    text = fake.text(max_nb_chars = (1024 **2) * size_mb)
+ 
     return text
+
+
 
 def load_text_from_file(path: str):
     """Loads a textfile from the given path and returns it"""
-    pass
+    str = open(path, 'r').read()
+    return str
 
 def save_text_to_file(text: str, path: str):
     file = open(path, "w")

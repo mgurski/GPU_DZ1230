@@ -30,7 +30,7 @@ def counting_vowels_in_text(text):
         for(i = start; i <= end; i++){
 
             if (text[i] == 'a' || text[i] == 'A' || text[i] == 'e' || text[i] == 'E' || text[i] == 'i' 
-                || text[i] == 'I' || text[i] =='o' || text[i] =='O' || text[i] == 'u' || text[i] == 'U')
+                || text[i] == 'I' || text[i] =='o' || text[i] =='O' || text[i] == 'u' || text[i] == 'U' || text[i] == 'y' || text[i] == 'Y')
             {
                 results[i] = 1;
             }
