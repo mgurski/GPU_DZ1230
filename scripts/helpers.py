@@ -5,7 +5,7 @@ import lorem
 import math
 
 def generate_text(length: int):
-    letters = string.ascii_letters + string.whitespace.replace('\x0b\x0c','')
+    letters = string.ascii_letters + string.whitespace.replace('\x0b\x0c','') + 'ąĄęĘóÓżŻźŹćĆńŃśŚłŁ'
     result_str = ''.join(random.choice(letters) for i in range(length))
     return result_str
 
