@@ -34,7 +34,7 @@ if __name__ == "__main__":
     if(args.path != ''):
         text = scripts.helpers.load_text_from_file(args.path)
     else:
-        text = scripts.helpers.generate_text(args.autogenerate)
+        text = scripts.helpers.generate_text_in_mb(args.autogenerate)
 
     if(args.cpu):
         print(scripts.cpu.counting_vowels_in_text(text))
