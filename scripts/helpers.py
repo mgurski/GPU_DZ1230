@@ -16,8 +16,10 @@ def generate_text_in_mb(size: int):
     return text
 
 def load_text_from_file(path: str):
-    """Loads a textfile from the given path and returns it"""
-    pass
+    file = open(path, "r")
+    content = file.read()
+    file.close()
+    return content
 
 def save_text_to_file(text: str, path: str):
     file = open(path, "w")
