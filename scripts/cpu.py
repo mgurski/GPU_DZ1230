@@ -28,6 +28,4 @@ def counting_vowels_in_text(text):
         if (i == 'Y'):
            sum+=1
 
-
-    #print(sum)
     return sum
