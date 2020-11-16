@@ -17,17 +17,16 @@ def faker_text(size_mb: int):
  
     return text
 
-def faker_text_length(length: int):
+def faker_text_in_mb(size_mb: int):
     fake = Faker()
 
-    text = fake.text(max_nb_chars=1024)
+    text = fake.text(max_nb_chars = (1024 **2)) * size_mb
 
     return text
 
 def generate_text_in_mb(size: int):
-    text = faker_text_length(1000)
-    size = size * 1000000
-    text = text*math.ceil((size/int(1000)))
+    text = faker_text_in_mb(size)
+    
     return text
 
 def load_text_from_file(path: str):
