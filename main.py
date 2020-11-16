@@ -5,9 +5,10 @@ import scripts.gpu
 import scripts.cpu_tests
 import scripts.gpu_tests
 import scripts.helpers
-
+import time
 
 if __name__ == "__main__":
+    
 
     parser = argparse.ArgumentParser()
 
@@ -31,16 +32,25 @@ if __name__ == "__main__":
 
     text = ''
 
-    if(args.path != ''):
+    if(args.cpu_test):
+        scripts.cpu_tests.cpu_test()
+    elif(args.gpu_test):
+        scripts.gpu_tests.gpu_test()
+    elif(args.path != ''):
         text = scripts.helpers.load_text_from_file(args.path)
     else:
         text = scripts.helpers.generate_text_in_mb(args.autogenerate)
 
     if(args.cpu):
-        print(scripts.cpu.counting_vowels_in_text(text))
+        start = time.perf_counter()
+        scripts.cpu.counting_vowels_in_text(text)
+        print(time.perf_counter()-start)
+        
     elif(args.gpu):
-        print(scripts.gpu.counting_vowels_in_text(text))
-    elif(args.cpu_test):
-        scripts.cpu_tests.cpu_test()
-    elif(args.gpu_test):
-        scripts.gpu_tests.gpu_test()
+        start = time.perf_counter()
+        scripts.gpu.counting_vowels_in_text(text)
+        print(time.perf_counter()-start)
+
+
+
+
