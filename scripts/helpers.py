@@ -14,8 +14,11 @@ def generate_text(length: int):
 def faker_text(size_mb: int):
     fake = Faker()
 
-    text = fake.text(max_nb_chars = (1024 **2) * size_mb)
- 
+    #pełne
+    #text = fake.text(max_nb_chars = (1024 **2) * size_mb)
+
+    #szybkie (mnożenie 1mb)
+    text = fake.text(max_nb_chars = (1024 **2)) * size_mb 
     return text
 
 
