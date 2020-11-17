@@ -17,8 +17,8 @@ def cpu_test():
     current_result_list = []
 
     for i in range(len(test_sizes)):
-        #text = helpers.generate_text(test_sizes[i])
-        text = "abcd"
+        text = helpers.generate_text(test_sizes[i])
+        #text = "abcd"
 
         current_performance_test_list.clear()
         current_result_list.clear()
