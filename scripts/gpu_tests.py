@@ -18,24 +18,26 @@ def gpu_test():
     clearing_text = helpers.generate_text_in_mb(350)
 
     for i in range(len(test_sizes)):
-        print('generowanie tekstu nr ' + str(i) + '.0' + ' - ' + str(test_sizes[i]) + ' MB')
-        text = helpers.generate_text_in_mb(test_sizes[i])
+        #print('generowanie tekstu nr ' + str(i) + '.0' + ' - ' + str(test_sizes[i]) + ' MB')
+        #text = helpers.generate_text_in_mb(test_sizes[i])
 
         current_performance_test_list.clear()
         current_result_list.clear()
 
         current_performance_test_list.append(str(test_sizes[i]) + " MB")
         current_result_list.append(str(test_sizes[i]) + " MB")
-
+        
+        print('testowanie dla ' + str(test_sizes[i]) + ' MB')
         for j in range(10):
+            print('generowanie tekstu nr ' + str(i) + '.' + str(j))
+            text = helpers.generate_text_in_mb(test_sizes[i])
             print('test nr ' + str(j))
             start = time.perf_counter()
             result = gpu.counting_vowels_in_text(text)
             end = time.perf_counter()-start
             
+            print('Czyszczenie...')
             gpu.counting_vowels_in_text(clearing_text)
-            print('generowanie tekstu nr ' + str(i) + '.' + str(j+1))
-            text = helpers.generate_text_in_mb(test_sizes[i])
             
             current_result_list.append(result)
             current_performance_test_list.append(end)
