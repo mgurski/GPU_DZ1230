@@ -26,7 +26,7 @@ def faker_text_in_mb(size_mb: int):
 
 def generate_text_in_mb(size: int):
     text = faker_text_in_mb(size)
-    
+
     return text
 
 def load_text_from_file(path: str):
