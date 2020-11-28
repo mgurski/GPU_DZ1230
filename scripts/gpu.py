@@ -1,5 +1,5 @@
-import pycuda.driver as cuda
 import pycuda.autoinit
+import pycuda.driver as cuda
 from pycuda.compiler import SourceModule
 import pycuda.gpuarray as gpuarray
 import numpy
@@ -38,21 +38,41 @@ def counting_vowels_in_text(text):
 
     }
     """)
-
-    device_text = gpuarray.to_gpu(numpy.array([text], dtype=str))
-    device_results = gpuarray.zeros(len(text)*4, dtype=numpy.int32)
-            
-    chunk_size = 1000
-    threads_per_block = 512
-    blocks_per_grid = numpy.int(math.ceil(len(text) / (chunk_size * threads_per_block)))
-
-    device_text_size = numpy.int32(len(text))     
+    cuda.start_profiler()
     
-    function = mod.get_function("count_vowels")       
-    function(device_text, device_results, device_text_size, numpy.int32(chunk_size), numpy.int32(blocks_per_grid), block = (threads_per_block, 1, 1), grid = (blocks_per_grid, 1, 1))
+    max_text_size_in_mb = 100
+
+    text_chunks = []
+    text_chunks_count = math.ceil(len(text) / (max_text_size_in_mb*(1024**2)))
+
+    while(len(text) > (max_text_size_in_mb*1024**2)):
+        text_chunk = text[:math.ceil(len(text)/(text_chunks_count))]
+        text2 = text[math.ceil(len(text)/(text_chunks_count)):]
+
+        text = text2
+        text_chunks.append(text_chunk)
+
+    text_chunks.append(text)
+
+    cumulative_results = 0
+    for text_chunk in text_chunks:
+        device_text = gpuarray.to_gpu(numpy.array([text_chunk], dtype=str))
+        device_results = gpuarray.zeros(len(text_chunk)*4, dtype=numpy.int32)
+                
+        chunk_size = 1000
+        threads_per_block = 512
+        blocks_per_grid = numpy.int(math.ceil(len(text_chunk) / (chunk_size * threads_per_block)))
+
+        device_text_size = numpy.int32(len(text_chunk))     
+        
+        function = mod.get_function("count_vowels")       
+        function(device_text, device_results, device_text_size, numpy.int32(chunk_size), numpy.int32(blocks_per_grid), block = (threads_per_block, 1, 1), grid = (blocks_per_grid, 1, 1))
+        
+        host_results = device_results.get() 
+
+        results = numpy.count_nonzero(host_results == 1)
+        cumulative_results += results
     
-    host_results = device_results.get() 
+    cuda.stop_profiler()
+    return cumulative_results
 
-    results = numpy.count_nonzero(host_results == 1)
-
-    return results

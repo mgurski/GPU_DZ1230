@@ -6,6 +6,7 @@ import scripts.cpu_tests
 import scripts.gpu_tests
 import scripts.helpers
 import time
+import sys
 
 if __name__ == "__main__":
     

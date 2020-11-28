@@ -3,7 +3,8 @@ import string
 import random
 import math
 from faker import Faker
-
+import sys
+import copy
 
 def generate_text(length: int):
     letters = string.ascii_letters + string.whitespace.replace('\x0b\x0c','')
@@ -45,3 +46,4 @@ def utf8len(s):
 def get_file_size(text):
     """Returns file size in MB"""
     return hurry.filesize.size(utf8len(text))
+
